@@ -2,21 +2,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // Modal Elements
     const loginModal = document.getElementById('loginModal');
     const signupModal = document.getElementById('signupModal');
-    const bookMeetingModal = document.getElementById('bookMeetingModal');
     const loginBtn = document.getElementById('loginBtn');
     const signupBtn = document.getElementById('signupBtn');
-    const logoutBtn = document.getElementById('logoutBtn');
-    const meetingsLink = document.getElementById('meetingsLink');
     const closeBtns = document.querySelectorAll('.close');
 
     // Form Elements
     const loginForm = document.getElementById('loginForm');
     const signupForm = document.getElementById('signupForm');
-    const bookMeetingForm = document.getElementById('bookMeetingForm');
-
-    // User State
-    let currentUser = null;
-    let meetings = [];
 
     // Sample Data
     const pitches = [
@@ -76,138 +68,32 @@ document.addEventListener('DOMContentLoaded', () => {
         modal.style.display = 'none';
     }
 
-    // Authentication Functions
-    function login(email, password) {
-        // Simulate API call
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                // In a real app, this would validate against a backend
-                currentUser = {
-                    email,
-                    name: email.split('@')[0],
-                    role: 'entrepreneur' // This would come from the backend
-                };
-                localStorage.setItem('user', JSON.stringify(currentUser));
-                resolve(currentUser);
-            }, 1000);
-        });
-    }
-
-    function logout() {
-        currentUser = null;
-        localStorage.removeItem('user');
-        updateUIForLoggedOutUser();
-    }
-
-    function checkAuth() {
-        const user = localStorage.getItem('user');
-        if (user) {
-            currentUser = JSON.parse(user);
-            updateUIForLoggedInUser();
-        }
-    }
-
-    // UI Update Functions
-    function updateUIForLoggedInUser() {
-        loginBtn.style.display = 'none';
-        signupBtn.style.display = 'none';
-        logoutBtn.style.display = 'block';
-        meetingsLink.style.display = 'block';
-        document.getElementById('submitPitchBtn').disabled = false;
-        document.getElementById('becomeInvestorBtn').disabled = false;
-    }
-
-    function updateUIForLoggedOutUser() {
-        loginBtn.style.display = 'block';
-        signupBtn.style.display = 'block';
-        logoutBtn.style.display = 'none';
-        meetingsLink.style.display = 'none';
-        document.getElementById('submitPitchBtn').disabled = true;
-        document.getElementById('becomeInvestorBtn').disabled = true;
-        document.getElementById('meetings').style.display = 'none';
-    }
-
-    // Meeting Functions
-    function addMeeting(meeting) {
-        meetings.push({
-            ...meeting,
-            id: Date.now(),
-            status: 'scheduled',
-            createdBy: currentUser.email
-        });
-        localStorage.setItem('meetings', JSON.stringify(meetings));
-        loadMeetings();
-    }
-
-    function loadMeetings() {
-        const meetingsList = document.querySelector('.meetings-list');
-        meetingsList.innerHTML = '';
-
-        const userMeetings = meetings.filter(meeting => 
-            meeting.createdBy === currentUser.email || currentUser.role === 'admin'
-        );
-
-        userMeetings.forEach(meeting => {
-            const meetingCard = document.createElement('div');
-            meetingCard.className = 'meeting-card';
-            meetingCard.innerHTML = `
-                <div class="meeting-header">
-                    <h3 class="meeting-title">${meeting.title}</h3>
-                    <span class="meeting-type">${meeting.type}</span>
-                </div>
-                <div class="meeting-details">
-                    <p><i class="fas fa-calendar"></i> ${new Date(meeting.dateTime).toLocaleString()}</p>
-                    <p><i class="fas fa-info-circle"></i> ${meeting.description}</p>
-                </div>
-                <div class="meeting-actions">
-                    <span class="meeting-status status-${meeting.status}">${meeting.status}</span>
-                    ${meeting.status === 'scheduled' ? `
-                        <button class="btn-secondary" onclick="cancelMeeting(${meeting.id})">Cancel</button>
-                    ` : ''}
-                </div>
-            `;
-            meetingsList.appendChild(meetingCard);
-        });
-    }
-
-    // Event Listeners
+    // Event Listeners for Modals
     loginBtn.addEventListener('click', () => openModal(loginModal));
     signupBtn.addEventListener('click', () => openModal(signupModal));
-    logoutBtn.addEventListener('click', logout);
-
-    meetingsLink.addEventListener('click', (e) => {
-        e.preventDefault();
-        document.getElementById('meetings').style.display = 'block';
-        loadMeetings();
-    });
 
     closeBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             closeModal(loginModal);
             closeModal(signupModal);
-            closeModal(bookMeetingModal);
         });
     });
 
     window.addEventListener('click', (e) => {
         if (e.target === loginModal) closeModal(loginModal);
         if (e.target === signupModal) closeModal(signupModal);
-        if (e.target === bookMeetingModal) closeModal(bookMeetingModal);
     });
 
     // Form Submissions
-    loginForm.addEventListener('submit', async (e) => {
+    loginForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const email = loginForm.querySelector('input[type="email"]').value;
         const password = loginForm.querySelector('input[type="password"]').value;
 
-        try {
-            await login(email, password);
-            alert('Login successful!');
-            closeModal(loginModal);
-        } catch (error) {
-            alert('Login failed. Please try again.');
-        }
+        // Here you would typically make an API call to your backend
+        console.log('Login attempt:', { email, password });
+        alert('Login successful!');
+        closeModal(loginModal);
     });
 
     signupForm.addEventListener('submit', (e) => {
@@ -225,36 +111,70 @@ document.addEventListener('DOMContentLoaded', () => {
         closeModal(signupModal);
     });
 
-    bookMeetingForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        if (!currentUser) {
-            alert('Please login to book a meeting');
-            return;
-        }
+    // Dynamic Content Loading
+    function loadPitches() {
+        const pitchGrid = document.querySelector('.pitch-grid');
+        pitchGrid.innerHTML = ''; // Clear existing content
 
-        const meetingData = {
-            title: document.getElementById('meetingTitle').value,
-            dateTime: document.getElementById('meetingDateTime').value,
-            description: document.getElementById('meetingDescription').value,
-            type: document.getElementById('meetingType').value
-        };
+        pitches.forEach(pitch => {
+            const pitchCard = document.createElement('div');
+            pitchCard.className = 'pitch-card';
+            pitchCard.innerHTML = `
+                <div class="pitch-image">
+                    <img src="${pitch.image}" alt="${pitch.title}">
+                </div>
+                <div class="pitch-content">
+                    <h3>${pitch.title}</h3>
+                    <p>${pitch.description}</p>
+                    <div class="pitch-stats">
+                        <span><i class="fas fa-users"></i> ${pitch.investors} Investors</span>
+                        <span><i class="fas fa-dollar-sign"></i> ${pitch.funding}</span>
+                    </div>
+                    <button class="btn-primary">View Pitch</button>
+                </div>
+            `;
+            pitchGrid.appendChild(pitchCard);
+        });
+    }
 
-        addMeeting(meetingData);
-        closeModal(bookMeetingModal);
-        bookMeetingForm.reset();
-    });
+    function loadInvestors() {
+        const investorGrid = document.querySelector('.investor-grid');
+        investorGrid.innerHTML = ''; // Clear existing content
+
+        investors.forEach(investor => {
+            const investorCard = document.createElement('div');
+            investorCard.className = 'investor-card';
+            investorCard.innerHTML = `
+                <div class="investor-image">
+                    <img src="${investor.image}" alt="${investor.name}">
+                </div>
+                <div class="investor-content">
+                    <h3>${investor.name}</h3>
+                    <p>${investor.title}</p>
+                    <div class="investor-stats">
+                        <span><i class="fas fa-briefcase"></i> ${investor.investments} Investments</span>
+                        <span><i class="fas fa-dollar-sign"></i> ${investor.funding}</span>
+                    </div>
+                </div>
+            `;
+            investorGrid.appendChild(investorCard);
+        });
+    }
 
     // Load initial content
-    checkAuth();
     loadPitches();
     loadInvestors();
 
-    // Make functions available globally
-    window.cancelMeeting = (meetingId) => {
-        meetings = meetings.map(meeting => 
-            meeting.id === meetingId ? { ...meeting, status: 'cancelled' } : meeting
-        );
-        localStorage.setItem('meetings', JSON.stringify(meetings));
-        loadMeetings();
-    };
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
 });
