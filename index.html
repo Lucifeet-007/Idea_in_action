@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PitchPerfect - Your Shark Tank Platform</title>
+    <title>Ideas in Action - Connect with Investors</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -14,9 +14,10 @@
             <a href="#home" class="active">Home</a>
             <a href="#pitches">Pitches</a>
             <a href="#investors">Investors</a>
-            <a href="#profile">Profile</a>
+            <a href="#meetings" id="meetingsLink">My Meetings</a>
             <button class="btn-primary" id="loginBtn">Login</button>
             <button class="btn-secondary" id="signupBtn">Sign Up</button>
+            <button class="btn-secondary" id="logoutBtn" style="display: none;">Logout</button>
         </div>
     </nav>
 
@@ -26,9 +27,9 @@
                 <h1>Turn Your Dreams Into Reality</h1>
                 <p>Connect with investors who believe in your vision</p>
                 <div class="cta-buttons">
-                    <button class="btn-primary">Submit Your Pitch</button>
-                    <button class="btn-secondary">Become an Investor</button>
-                    <button class="btn-secondary">Book a meeting with the investors</button>
+                    <button class="btn-primary" id="submitPitchBtn">Submit Your Pitch</button>
+                    <button class="btn-secondary" id="becomeInvestorBtn">Become an Investor</button>
+                    <button class="btn-secondary" onclick="openModal(document.getElementById('bookMeetingModal'))">Book a Meeting</button>
                 </div>
             </div>
         </section>
@@ -36,41 +37,21 @@
         <section id="featured-pitches" class="section">
             <h2>Featured Pitches</h2>
             <div class="pitch-grid">
-                <div class="pitch-card">
-                    <div class="pitch-image">
-                        <img src="https://via.placeholder.com/300x200" alt="Pitch Image">
-                    </div>
-                    <div class="pitch-content">
-                        <h3>EcoTech Solutions</h3>
-                        <p>Revolutionary green technology for sustainable living</p>
-                        <div class="pitch-stats">
-                            <span><i class="fas fa-users"></i> 5 Investors</span>
-                            <span><i class="fas fa-dollar-sign"></i> $500K</span>
-                        </div>
-                        <button class="btn-primary">View Pitch</button>
-                    </div>
-                </div>
-                <!-- More pitch cards will be added dynamically -->
+                <!-- Pitches will be loaded dynamically -->
             </div>
         </section>
 
-        <section id="Investors" class="section">
-            <h2> Investors</h2>
+        <section id="investors" class="section">
+            <h2>Our Investors</h2>
             <div class="investor-grid">
-                <div class="investor-card">
-                    <div class="investor-image">
-                        <img src="![Image](https://github.com/user-attachments/assets/64d6002f-2367-4726-a68c-21aec921cefa)" alt="Investor Image">
-                    </div>
-                    <div class="investor-content">
-                        <h3>G.Lohith</h3>
-                        <p>Tech Entrepreneur</p>
-                        <div class="investor-stats">
-                            <p><i class="fas fa-briefcase"></i> 15 Investments</p>
-                            <p><i class="fas fa-dollar-sign"></i> $2M+</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- More investor cards will be added dynamically -->
+                <!-- Investors will be loaded dynamically -->
+            </div>
+        </section>
+
+        <section id="meetings" class="section" style="display: none;">
+            <h2>My Meetings</h2>
+            <div class="meetings-list">
+                <!-- Meetings will be loaded dynamically -->
             </div>
         </section>
     </main>
@@ -119,6 +100,34 @@
         </div>
     </div>
 
+    <!-- Book Meeting Modal -->
+    <div class="modal" id="bookMeetingModal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Book a Meeting</h2>
+            <form id="bookMeetingForm">
+                <div class="form-group">
+                    <input type="text" id="meetingTitle" placeholder="Meeting Title" required>
+                </div>
+                <div class="form-group">
+                    <input type="datetime-local" id="meetingDateTime" required>
+                </div>
+                <div class="form-group">
+                    <textarea id="meetingDescription" placeholder="Meeting Description" required></textarea>
+                </div>
+                <div class="form-group">
+                    <select id="meetingType" required>
+                        <option value="">Select Meeting Type</option>
+                        <option value="pitch">Pitch Presentation</option>
+                        <option value="discussion">Discussion</option>
+                        <option value="negotiation">Negotiation</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary">Schedule Meeting</button>
+            </form>
+        </div>
+    </div>
+
     <footer>
         <div class="footer-content">
             <div class="footer-section">
@@ -142,7 +151,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2024 PitchPerfect. All rights reserved.</p>
+            <p>&copy; 2024 Ideas in Action. All rights reserved.</p>
         </div>
     </footer>
 
