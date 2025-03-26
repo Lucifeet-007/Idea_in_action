@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
             title: 'Angel Investor',
             investments: 12,
             funding: '$1.5M+',
-            image: 'https://via.placeholder.com/150'
+            image: 'https://github.com/Lucifeet-007/Idea_in_action/issues/1#issue-2948340970'
         }
     ];
 
