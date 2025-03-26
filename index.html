@@ -3,20 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PitchPerfect - Your Shark Tank Platform</title>
+    <title>Ideas in Action - Connect with Investors</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <nav class="navbar">
-        <div class="logo">PitchPerfect</div>
+        <div class="logo">Ideas in Action</div>
         <div class="nav-links">
             <a href="#home" class="active">Home</a>
             <a href="#pitches">Pitches</a>
             <a href="#investors">Investors</a>
-            <a href="#profile">Profile</a>
+            <a href="#meetings" id="meetingsLink" style="display: none;">My Meetings</a>
             <button class="btn-primary" id="loginBtn">Login</button>
             <button class="btn-secondary" id="signupBtn">Sign Up</button>
+            <button class="btn-secondary" id="logoutBtn" style="display: none;">Logout</button>
         </div>
     </nav>
 
@@ -26,50 +27,30 @@
                 <h1>Turn Your Dreams Into Reality</h1>
                 <p>Connect with investors who believe in your vision</p>
                 <div class="cta-buttons">
-                    <button class="btn-primary">Submit Your Pitch</button>
-                    <button class="btn-secondary">Become an Investor</button>
+                    <button class="btn-primary" id="submitPitchBtn">Submit Your Pitch</button>
+                    <button class="btn-secondary" id="becomeInvestorBtn">Become an Investor</button>
                 </div>
             </div>
         </section>
 
-        <section id="featured-pitches" class="section">
+        <section id="pitches" class="section">
             <h2>Featured Pitches</h2>
             <div class="pitch-grid">
-                <div class="pitch-card">
-                    <div class="pitch-image">
-                        <img src="https://via.placeholder.com/300x200" alt="Pitch Image">
-                    </div>
-                    <div class="pitch-content">
-                        <h3>EcoTech Solutions</h3>
-                        <p>Revolutionary green technology for sustainable living</p>
-                        <div class="pitch-stats">
-                            <span><i class="fas fa-users"></i> 5 Investors</span>
-                            <span><i class="fas fa-dollar-sign"></i> $500K</span>
-                        </div>
-                        <button class="btn-primary">View Pitch</button>
-                    </div>
-                </div>
-                <!-- More pitch cards will be added dynamically -->
+                <!-- Pitch cards will be added dynamically -->
             </div>
         </section>
 
-        <section id="top-investors" class="section">
-            <h2>Top Investors</h2>
+        <section id="investors" class="section">
+            <h2>Our Investors</h2>
             <div class="investor-grid">
-                <div class="investor-card">
-                    <div class="investor-image">
-                        <img src="https://via.placeholder.com/150" alt="Investor Image">
-                    </div>
-                    <div class="investor-content">
-                        <h3>John Smith</h3>
-                        <p>Tech Entrepreneur</p>
-                        <div class="investor-stats">
-                            <span><i class="fas fa-briefcase"></i> 15 Investments</span>
-                            <span><i class="fas fa-dollar-sign"></i> $2M+</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- More investor cards will be added dynamically -->
+                <!-- Investor cards will be added dynamically -->
+            </div>
+        </section>
+
+        <section id="meetings" class="section" style="display: none;">
+            <h2>My Meetings</h2>
+            <div class="meetings-list">
+                <!-- Meetings will be added dynamically -->
             </div>
         </section>
     </main>
@@ -118,33 +99,42 @@
         </div>
     </div>
 
+    <!-- Book Meeting Modal -->
+    <div class="modal" id="bookMeetingModal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Book a Meeting</h2>
+            <form id="bookMeetingForm">
+                <div class="form-group">
+                    <input type="text" id="meetingTitle" placeholder="Meeting Title" required>
+                </div>
+                <div class="form-group">
+                    <input type="datetime-local" id="meetingDateTime" required>
+                </div>
+                <div class="form-group">
+                    <textarea id="meetingDescription" placeholder="Meeting Description" required></textarea>
+                </div>
+                <div class="form-group">
+                    <select id="meetingType" required>
+                        <option value="">Select Meeting Type</option>
+                        <option value="pitch">Pitch Meeting</option>
+                        <option value="discussion">Discussion</option>
+                        <option value="negotiation">Negotiation</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary">Book Meeting</button>
+            </form>
+        </div>
+    </div>
+
     <footer>
         <div class="footer-content">
             <div class="footer-section">
-                <h3>PitchPerfect</h3>
+                <h3>Ideas in Action</h3>
                 <p>Connecting entrepreneurs with investors</p>
             </div>
             <div class="footer-section">
                 <h3>Quick Links</h3>
-                <a href="#about">About</a>
-                <a href="#contact">Contact</a>
-                <a href="#terms">Terms</a>
-                <a href="#privacy">Privacy</a>
-            </div>
-            <div class="footer-section">
-                <h3>Connect With Us</h3>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2024 PitchPerfect. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
-</body>
-</html>
+                <a href="#about">About: Our aim is to encourage entrepreneurship in an individual</a>
+                <a href="#contact">Contact: ideasinaction18@gmail.com</a>
+               
