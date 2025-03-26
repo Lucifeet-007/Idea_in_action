@@ -37,21 +37,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const investors = [
         {
-            name: 'John Smith',
+            name: 'G.Lohith',
             title: 'Tech Entrepreneur',
             investments: 15,
             funding: '$2M+',
             image: 'https://via.placeholder.com/150'
         },
         {
-            name: 'Sarah Johnson',
+            name: 'T.Niranjan',
             title: 'Venture Capitalist',
             investments: 25,
             funding: '$5M+',
             image: 'https://via.placeholder.com/150'
         },
         {
-            name: 'Michael Chen',
+            name: 'M.Praveen',
             title: 'Angel Investor',
             investments: 12,
             funding: '$1.5M+',
