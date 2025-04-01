@@ -10,7 +10,218 @@
     <script>
         // Add this script at the end of the body
         document.getElementById('profileLink').addEventListener('click', function(e) {
-            // Check if user is logged in
+            // Check if user is logged in<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PitchPerfect - Your Shark Tank Platform</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">PitchPerfect</div>
+        <div class="nav-links">
+            <a href="#home" class="active">Home</a>
+            <a href="#pitches">Pitches</a>
+            <a href="#investors">Investors</a>
+            <a href="#profile">Profile</a>
+            <button class="btn-primary" id="loginBtn">Login</button>
+            <button class="btn-secondary" id="signupBtn">Sign Up</button>
+        </div>
+    </nav>
+
+    <main>
+        <section id="hero" class="hero-section">
+            <div class="hero-content">
+                <h1>Turn Your Dreams Into Reality</h1>
+                <p>Connect with investors who believe in your vision</p>
+                <div class="cta-buttons">
+                    <button class="btn-primary">Submit Your Pitch</button>
+                    <button class="btn-secondary">Become an Investor</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="featured-pitches" class="section">
+            <h2>Featured Pitches</h2>
+            <div class="pitch-grid">
+                <!-- Company 1 -->
+                <div class="pitch-card">
+                    <div class="pitch-image">
+                        <img src="https://via.placeholder.com/300x200" alt="TechInnovate">
+                    </div>
+                    <div class="pitch-content">
+                        <h3>TechInnovate Solutions</h3>
+                        <p>Revolutionary AI-powered business automation platform</p>
+                        <div class="pitch-stats">
+                            <span><i class="fas fa-users"></i> 3 Investors</span>
+                            <span><i class="fas fa-dollar-sign"></i> $750K</span>
+                        </div>
+                        <button class="btn-primary">View Pitch</button>
+                    </div>
+                </div>
+
+                <!-- Company 2 -->
+                <div class="pitch-card">
+                    <div class="pitch-image">
+                        <img src="https://via.placeholder.com/300x200" alt="EcoSmart">
+                    </div>
+                    <div class="pitch-content">
+                        <h3>EcoSmart Energy</h3>
+                        <p>Sustainable energy solutions for modern homes</p>
+                        <div class="pitch-stats">
+                            <span><i class="fas fa-users"></i> 4 Investors</span>
+                            <span><i class="fas fa-dollar-sign"></i> $1.2M</span>
+                        </div>
+                        <button class="btn-primary">View Pitch</button>
+                    </div>
+                </div>
+
+                <!-- Company 3 -->
+                <div class="pitch-card">
+                    <div class="pitch-image">
+                        <img src="https://via.placeholder.com/300x200" alt="HealthTech">
+                    </div>
+                    <div class="pitch-content">
+                        <h3>HealthTech Pro</h3>
+                        <p>Next-generation healthcare monitoring system</p>
+                        <div class="pitch-stats">
+                            <span><i class="fas fa-users"></i> 5 Investors</span>
+                            <span><i class="fas fa-dollar-sign"></i> $900K</span>
+                        </div>
+                        <button class="btn-primary">View Pitch</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="top-investors" class="section">
+            <h2>Top Investors</h2>
+            <div class="investor-grid">
+                <!-- Investor 1 -->
+                <div class="investor-card">
+                    <div class="investor-image">
+                        <img src="https://via.placeholder.com/150" alt="G.Lohith">
+                    </div>
+                    <div class="investor-content">
+                        <h3>G.Lohith</h3>
+                        <p>Tech Entrepreneur</p>
+                        <div class="investor-stats">
+                            <span><i class="fas fa-briefcase"></i> 15 Investments</span>
+                            <span><i class="fas fa-dollar-sign"></i> $2M+</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Investor 2 -->
+                <div class="investor-card">
+                    <div class="investor-image">
+                        <img src="https://via.placeholder.com/150" alt="T.Niranjan">
+                    </div>
+                    <div class="investor-content">
+                        <h3>T.Niranjan</h3>
+                        <p>Venture Capitalist</p>
+                        <div class="investor-stats">
+                            <span><i class="fas fa-briefcase"></i> 25 Investments</span>
+                            <span><i class="fas fa-dollar-sign"></i> $5M+</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Investor 3 -->
+                <div class="investor-card">
+                    <div class="investor-image">
+                        <img src="https://via.placeholder.com/150" alt="M.Praveen">
+                    </div>
+                    <div class="investor-content">
+                        <h3>M.Praveen</h3>
+                        <p>Angel Investor</p>
+                        <div class="investor-stats">
+                            <span><i class="fas fa-briefcase"></i> 12 Investments</span>
+                            <span><i class="fas fa-dollar-sign"></i> $1.5M+</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Login</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <input type="email" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" placeholder="Password" required>
+                </div>
+                <button type="submit" class="btn-primary">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div class="modal" id="signupModal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Sign Up</h2>
+            <form id="signupForm">
+                <div class="form-group">
+                    <input type="text" placeholder="Full Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" placeholder="Password" required>
+                </div>
+                <div class="form-group">
+                    <select required>
+                        <option value="">Select Role</option>
+                        <option value="entrepreneur">Entrepreneur</option>
+                        <option value="investor">Investor</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary">Sign Up</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>PitchPerfect</h3>
+                <p>Connecting entrepreneurs with investors</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="#about">About: This website connects the untouched entrepreneurs to the investors</a>
+                <a href="#contact">Contact: ideasinaction@gmail.com</a>
+                <a href="#terms">Terms</a>
+                <a href="#privacy">Privacy</a>
+            </div>
+            <div class="footer-section">
+                <h3>Connect With Us</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 PitchPerfect. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
             const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
             if (!isLoggedIn) {
                 e.preventDefault();
